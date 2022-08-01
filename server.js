@@ -19,7 +19,8 @@ module.exports.startApolloServer = async (options = { port: process.env.PORT || 
 
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  const urlApollo = process.env.MONGODB_URI || `http://localhost:${options.port}${server.graphqlPath}`
+  const MONGODB = process.env.MONGODB_URI 
+  const urlApollo = `http://localhost:${options.port}${server.graphqlPath}`
   
   await new Promise(resolve => app.listen(options, resolve));
   if (process.env.NODE_ENV !== 'test') {
@@ -29,7 +30,7 @@ module.exports.startApolloServer = async (options = { port: process.env.PORT || 
   }
   
   mongoose
-  .connect(urlApollo, { useNewUrlParser: true})
+  .connect(MONGODB, { useNewUrlParser: true})
   .then(() => {
       return { server, app };
   })
