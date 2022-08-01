@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
-const { MONGODB } =  require('./config.js') 
 const express = require('express')
 const bodyParser = require('body-parser');  
 
@@ -30,7 +29,7 @@ module.exports.startApolloServer = async (options = { port: process.env.PORT || 
   }
   
   mongoose
-  .connect(MONGODB, { useNewUrlParser: true})
+  .connect(urlApollo, { useNewUrlParser: true})
   .then(() => {
       return { server, app };
   })
